@@ -28,6 +28,17 @@ define(function (require, exports, module) {
     
     var FileSystem  = brackets.getModule("filesystem/FileSystem");
     
+    var File = brackets.getModule("filesystem/File");
+
+
+    /*
+    var file = new File('./', FileSystem);
+    file.read('.gitignore', function(err, data, stat){
+        console.log(err);
+        console.log(data);
+    });
+    */
+
     var _oldFilter = FileSystem._FileSystem.prototype._indexFilter;
     
     FileSystem._FileSystem.prototype._indexFilter = function (path, name) {
@@ -38,6 +49,6 @@ define(function (require, exports, module) {
             return false;
         }
         
-        return !name.match(/node_modules/);
+        return !name.match(/node_modules|target|bower_components/);
     };
 });
